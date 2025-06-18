@@ -1278,6 +1278,7 @@
 | [bestwebdesigntools](https://www.bestwebdesigntools.com/)| Discover latest design tools, agencies and landing pages templates across web|
 | [App Motion](https://appmotion.design/)| Explore the best, hand-picked app motion design |
 | [Uiland Design](https://uiland.design/)| Home of the best mobile ui inspirations from top companies in the world |
+| [UIUXshowcase](https://uiuxshowcase.com/)| A showcase of the best web design inspirations, UI UX resources, and AI tools |
 
 <div align="right">
     <b><a href="#table-of-contents">↥ Back To Top</a></b>
