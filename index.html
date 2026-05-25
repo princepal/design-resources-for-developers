@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simcrete Solutions — Editorial Landing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;450;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #141413;
+      --canvas: #F3F0EE;
+      --lifted: #FCFBFA;
+      --white: #fff;
+      --signal: #CF4500;
+      --signal-light: #F37338;
+      --muted: #696969;
+      --ghost: #E8E2DA;
+      --shadow-1: rgba(0, 0, 0, 0.04) 0 4px 24px;
+      --shadow-2: rgba(0, 0, 0, 0.08) 0 24px 48px;
+      --r-20: 20px;
+      --r-40: 40px;
+      --r-pill: 999px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "MarkForMC", "Sofia Sans", Arial, sans-serif;
+      background: var(--canvas);
+      color: var(--ink);
+      line-height: 1.4;
+    }
+    .container { width: min(1280px, calc(100vw - 48px)); margin: 0 auto; }
+
+    .floating-nav {
+      position: sticky;
+      top: 24px;
+      z-index: 20;
+      margin: 24px auto 32px;
+      width: min(1240px, calc(100vw - 40px));
+      background: rgba(255,255,255,.92);
+      border-radius: var(--r-pill);
+      padding: 14px 28px;
+      box-shadow: var(--shadow-1);
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      backdrop-filter: blur(6px);
+    }
+    .logo { display:flex; align-items:center; font-weight:700; letter-spacing:-.02em; }
+    .logo-mark { position: relative; width: 42px; height: 26px; margin-right: 12px; }
+    .logo-mark::before,.logo-mark::after {
+      content:""; position:absolute; top:0; width:26px; height:26px; border-radius:50%; opacity:.95;
+    }
+    .logo-mark::before { left:0; background:#EB001B; }
+    .logo-mark::after { left:16px; background:#F79E1B; mix-blend-mode:multiply; }
+    .nav-links { display:flex; gap:42px; margin: 0 auto; }
+    .nav-links a { color:var(--ink); text-decoration:none; font-size:16px; font-weight:500; letter-spacing:-.03em; }
+    .icon-btn { width:48px; height:48px; border:1px solid rgba(20,20,19,.45); border-radius:50%; background:#fff; }
+
+    .hero { padding: 20px 0 72px; position: relative; }
+    .hero-wrap {
+      display:grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items:center;
+    }
+    h1 {
+      font-size: clamp(40px, 5vw, 64px);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      font-weight: 500;
+      margin: 0 0 24px;
+      max-width: 12ch;
+    }
+    .hero p { font-size:16px; font-weight:450; max-width:52ch; margin-bottom:28px; }
+    .btn { border-radius:20px; padding:8px 24px; font-size:16px; font-weight:500; letter-spacing:-.02em; border:1.5px solid var(--ink); text-decoration:none; display:inline-block; }
+    .btn.primary { background:var(--ink); color:var(--canvas); }
+    .btn.secondary { background:#fff; color:var(--ink); margin-left:10px; }
+    .hero-media {
+      background: #262627 url('https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80') center/cover;
+      min-height: 520px;
+      border-radius: 40px;
+      box-shadow: var(--shadow-2);
+      position: relative;
+      overflow:hidden;
+    }
+    .quote-card {
+      position:absolute; right:22px; top:22px; width:min(420px, calc(100% - 44px));
+      background:#fff; border-radius:28px; padding:24px;
+    }
+    .quote-card h2 { margin:0 0 10px; font-size:42px; line-height:1; letter-spacing:-.02em; font-weight:500; }
+    .quote-card h2 span { color:var(--signal); display:block; }
+    .field { width:100%; margin:7px 0; padding:11px 14px; border:1px solid rgba(20,20,19,.2); border-radius:10px; font:inherit; }
+    .consent-btn { width:100%; background:var(--signal); color:#fff; border:0; border-radius:24px; padding:10px 18px; font-size:13px; }
+
+    .services { padding: 120px 0 100px; position: relative; overflow:hidden; }
+    .ghost { position:absolute; top:18px; left:2vw; font-size:clamp(62px, 9vw, 130px); color:var(--ghost); letter-spacing:-.02em; font-weight:500; pointer-events:none; }
+    .eyebrow { font-size:14px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; margin-bottom:8px; display:flex; align-items:center; gap:8px; }
+    .eyebrow::before { content:""; width:8px; height:8px; border-radius:50%; background:var(--signal-light); }
+    .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:38px; margin-top:44px; }
+    .service { position:relative; }
+    .circle { width:300px; height:300px; border-radius:50%; overflow:hidden; margin-bottom:22px; box-shadow:var(--shadow-2); max-width:100%; }
+    .circle img { width:100%; height:100%; object-fit:cover; }
+    .sat { position:absolute; left:230px; top:220px; width:56px; height:56px; border-radius:50%; background:#fff; border:0; font-size:24px; }
+    .service h3 { font-size:24px; font-weight:500; letter-spacing:-.02em; margin:8px 0; }
+    .service p { font-size:16px; font-weight:450; }
+
+    .orbit { position:absolute; inset: 160px 0 auto; height:240px; pointer-events:none; }
+    .orbit svg { width:100%; height:100%; }
+
+    .footer { background:var(--ink); color:#fff; margin-top:80px; padding:78px 0 130px; }
+    .footer h2 { font-size:48px; line-height:1.05; letter-spacing:-.02em; font-weight:500; max-width:12ch; }
+    .foot-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:34px; margin-top:40px; }
+    .foot-col h4 { font-size:13px; letter-spacing:.04em; text-transform:uppercase; color:rgba(255,255,255,.72); margin:0 0 14px; }
+    .foot-col a { display:block; color:#fff; text-decoration:none; font-size:14px; font-weight:450; margin:8px 0; }
+    .sub { margin-top:44px; border-top:1px solid rgba(255,255,255,.3); padding-top:20px; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; color:rgba(255,255,255,.8); font-size:14px; }
+
+    @media (max-width: 1023px) {
+      .nav-links { display:none; }
+      .hero-wrap { grid-template-columns:1fr; }
+      .cards { grid-template-columns:1fr 1fr; }
+      .sat { left:auto; right:36px; }
+    }
+    @media (max-width: 767px) {
+      .container { width: calc(100vw - 32px); }
+      .floating-nav { top:16px; margin-top:16px; }
+      .cards { grid-template-columns:1fr; }
+      .circle { width:220px; height:220px; }
+      .sat { top:160px; right: calc(100% - 240px); }
+      .footer h2 { font-size:36px; }
+      .foot-grid { grid-template-columns:1fr; }
+      .orbit { display:none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="floating-nav" aria-label="Primary">
+    <div class="logo"><span class="logo-mark" aria-hidden="true"></span>Mastercard <span style="font-weight:450; margin-left:4px;">x Simcrete</span></div>
+    <div class="nav-links">
+      <a href="#">For you</a><a href="#">For business</a><a href="#">For the world</a><a href="#">For innovators</a><a href="#">News and trends</a>
+    </div>
+    <button class="icon-btn" aria-label="Search">⌕</button>
+  </nav>
+
+  <section class="hero container">
+    <div class="hero-wrap">
+      <div>
+        <div class="eyebrow">Melbourne Concrete Specialists</div>
+        <h1>Premium concrete solutions, built to last.</h1>
+        <p>From exposed aggregate driveways to outdoor entertainment spaces, Simcrete delivers high-quality concrete outcomes with reliable service, modern finishes, and an editorially crafted customer experience.</p>
+        <a href="#" class="btn primary">Get free quote</a>
+        <a href="#" class="btn secondary">View projects</a>
+      </div>
+      <div class="hero-media">
+        <form class="quote-card" aria-label="Get your free concrete quote">
+          <h2>Get your free <span>concrete quote</span></h2>
+          <input class="field" placeholder="Full name *" />
+          <input class="field" placeholder="Phone number *" />
+          <input class="field" placeholder="Email address *" />
+          <input class="field" placeholder="Suburb / location *" />
+          <textarea class="field" rows="3" placeholder="Tell us about your project"></textarea>
+          <button class="consent-btn">Request my free estimate →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="services container">
+    <div class="ghost">Concrete Services</div>
+    <div class="eyebrow">Services</div>
+    <h2 style="font-size:36px;line-height:1.2;letter-spacing:-.02em;font-weight:500;max-width:18ch;margin:0;">Concrete services designed for modern Melbourne homes.</h2>
+    <div class="orbit" aria-hidden="true">
+      <svg viewBox="0 0 1200 240" fill="none"><path d="M20 210C240 80 420 80 620 180C820 280 1020 150 1180 42" stroke="#F37338" stroke-width="1.5"/></svg>
+    </div>
+    <div class="cards">
+      <article class="service">
+        <div class="circle"><img loading="lazy" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=80" alt="Concrete driveway" /></div>
+        <button class="sat" aria-label="Open driveway details">→</button>
+        <div class="eyebrow">Solutions</div>
+        <h3>Concrete driveways</h3>
+        <p>Strong, durable, and intentionally detailed for everyday use with long-term visual appeal.</p>
+      </article>
+      <article class="service" style="margin-top:80px;">
+        <div class="circle"><img loading="lazy" src="https://images.unsplash.com/photo-1523419409543-a5e549c1fde7?auto=format&fit=crop&w=700&q=80" alt="Patio and outdoor concrete" /></div>
+        <button class="sat" aria-label="Open patio details">→</button>
+        <div class="eyebrow">Solutions</div>
+        <h3>Patios & outdoor areas</h3>
+        <p>Premium exposed aggregate and smooth honed finishes for entertaining and family spaces.</p>
+      </article>
+      <article class="service" style="margin-top:20px;">
+        <div class="circle"><img loading="lazy" src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=700&q=80" alt="Residential pathway" /></div>
+        <button class="sat" aria-label="Open pathway details">→</button>
+        <div class="eyebrow">Solutions</div>
+        <h3>Concrete pathways</h3>
+        <p>Clean transitions that connect home entries and gardens through resilient, low-maintenance concrete.</p>
+      </article>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <h2>We’re always here when you need us.</h2>
+      <div class="foot-grid">
+        <div class="foot-col"><h4>Need help?</h4><a href="#">🛟 Support center ↗</a><a href="#">📍 Melbourne team ↗</a><a href="#">❓ FAQs ↗</a></div>
+        <div class="foot-col"><h4>Services</h4><a href="#">Concrete driveways</a><a href="#">Exposed aggregate</a><a href="#">Garage slabs</a></div>
+        <div class="foot-col"><h4>Company</h4><a href="#">About us</a><a href="#">Projects</a><a href="#">Contact</a></div>
+        <div class="foot-col"><h4>Follow</h4><a href="#">LinkedIn</a><a href="#">Facebook</a><a href="#">X</a><a href="#">YouTube</a></div>
+      </div>
+      <div class="sub"><span>© 2026 Simcrete Solutions. All rights reserved.</span><span>Privacy • Terms • Australia (EN) ⌄</span></div>
+    </div>
+  </footer>
+</body>
+</html>
